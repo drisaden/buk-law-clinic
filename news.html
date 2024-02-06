@@ -216,7 +216,32 @@ AOS.init({
     });
     
     
-    
+    window.onload = function () {
+fetch('https://www.googleapis.com/blogger/v3/blogs/4195482384384708356/posts?key=AIzaSyAH6Wex5qpSlUeNOds4OvtCSuoUK8c66kY')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        const newsItems = data.items.filter(item => item.labels.includes('News'));
+        
+
+        const populateNewsElement = document.getElementById('populate-News');
+        
+
+        newsItems.forEach(item => {
+            const src = item.content.match(/<img[^>]*src="([^"]*)"/)?.[1];
+            // console.log(src);
+
+            populateNewsElement.innerHTML += ``
+        });
+
+        });
+
+    })
+    .catch(error => {
+        console.log('Error fetching data:', error);
+    });
+
+};
     </script>
 <!--  <script src="js/jquery.slim.min.js" type="text/javascript" charset="utf-8"></script>-->
 <!-- <script src="js/bootstrap.js">

@@ -2,8 +2,8 @@ window.onload = function () {
 fetch('https://www.googleapis.com/blogger/v3/blogs/7706273476706534553/posts?key=AIzaSyD5dD55I9lEVPKAa5Gr_HcnpZIkhqdpXj0')
     .then(response => response.json())
     .then(data => {
-     //   console.log(data);
-       // const recentItems = data.items.filter(item => item.labels.includes('Recent'));
+     // console.log(data);
+       
         
 
         const populateBlog = document.getElementById('populateBlog');

@@ -7,11 +7,11 @@ window.onload = function () {
                 console.error('No items found in data');
                 return; // Exit if no items found
             }
-            const publicationItems = data.items.filter(item => item.labels && item.labels.includes('Publication'));
+            const publicationItems = data.items.filter(item => item.labels && item.labels.includes('Publications'));
 
-            const populatePublicationElement = document.getElementById('populate-Publication');
+            const populatePublicationElement = document.getElementById('populate-Publications');
             if (!populatePublicationElement) {
-                console.error('Element #populate-Publication not found');
+                console.error('Element #populate-Publications not found');
                 return; // Exit if the element is not found
             }
 
@@ -26,7 +26,7 @@ window.onload = function () {
                 
                 populatePublicationElement.innerHTML += `<div data-aos=" " class="bg-gray-100 shadow-lg w-full rounded-lg mb-3">
                     <div class="md:w-full overflow-hidden rounded-t">
-                     <span class="absolute left-0 bottom-0 bg-black text-white py-1 px-3 tx-sm" id="labels">$.labels}</span>
+                 
                       <img src="${src}" alt="${item.title}" class="w-full h-full object-cover object-center  border border-b-0 ">
                     </div> 
                     <div class="px-5 text-center pt-10">

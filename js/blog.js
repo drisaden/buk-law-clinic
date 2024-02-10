@@ -1,5 +1,5 @@
 window.onload = function () {
-    fetch('https://www.googleapis.com/blogger/v3/blogs/4195482384384708356/posts?key=AIzaSyD5dD55I9lEVPKAa5Gr_HcnpZIkhqdpXj0')
+    fetch('https://www.googleapis.com/blogger/v3/blogs/7090392525208537563/posts?key=AIzaSyD5dD55I9lEVPKAa5Gr_HcnpZIkhqdpXj0')
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -22,11 +22,7 @@ window.onload = function () {
                     // Consider handling items without images differently
                 }
 
-                // Assuming item.labels is an array, convert it to a string to display
-                const labels = item.labels.join(', ');
-
-                // Ensure that innerHTML concatenation doesn't override previous content inadvertently
-                // It's safer to use createElement and appendChild, but for simplicity, we'll concatenate HTML string
+              
                 
                 populatePublicationElement.innerHTML += `<div data-aos=" " class="bg-gray-100 shadow-lg w-full rounded-lg mb-3">
                     <div class="md:w-full overflow-hidden rounded-t">

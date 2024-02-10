@@ -217,21 +217,19 @@ AOS.init({
     
     
     window.onload = function () {
-fetch('https://www.googleapis.com/blogger/v3/blogs/7706273476706534553/posts?key=AIzaSyD5dD55I9lEVPKAa5Gr_HcnpZIkhqdpXj0')
-    .then(response => response.json())
-    .then(data => {
-        //console.log(data);
-        const newsItems = data.items.filter(item => item.labels.includes('News'));
-        
+    fetch('https://www.googleapis.com/blogger/v3/blogs/7090392525208537563/posts?key=AIzaSyD5dD55I9lEVPKAa5Gr_HcnpZIkhqdpXj0')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            const newsItems = data.items.filter(item => item.labels && item.labels.includes('News'));
+            
+            const populateNewsElement = document.getElementById('populate-News');
+            
+            newsItems.forEach(item => {
+                const src = item.content.match(/<img[^>]*src="([^"]*)"/)?.[1];
+                // console.log(src);
 
-        const populateNewsElement = document.getElementById('populate-News');
-        
-
-        newsItems.forEach(item => {
-            const src = item.content.match(/<img[^>]*src="([^"]*)"/)?.[1];
-            // console.log(src);
-
-            populateNewsElement.innerHTML +=      `<div data-aos=" " class="bg-gray-100 shadow-lg w-full rounded-lg mb-3">
+                populateNewsElement.innerHTML += `<div data-aos=" " class="bg-gray-100 shadow-lg w-full rounded-lg mb-3">
                     <div class="md:w-full overflow-hidden rounded-t">
                       <img src="${src}" alt="${item.title}" class="w-full h-full object-cover object-center  border border-b-0 ">
                     </div> 
@@ -242,16 +240,13 @@ fetch('https://www.googleapis.com/blogger/v3/blogs/7706273476706534553/posts?key
                      <a href="https://buklawclinic.com.ng/single.html?id=${item.id}" class=""> <p class="text-sm button py-3 md:text-2xl bg-red-700 text-white  mb-5 font-semibold">Read Full » </p> </a> 
                     </div>
                 </div>`;
+            });
+        })
+        .catch(error => {
+            console.log('Error fetching data:', error);
         });
-
-        });
-
-    })
-    .catch(error => {
-        console.log('Error fetching data:', error);
-    });
-
 };
+
     </script>
 <!--  <script src="js/jquery.slim.min.js" type="text/javascript" charset="utf-8"></script>-->
 <!-- <script src="js/bootstrap.js">

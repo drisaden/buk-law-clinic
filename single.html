@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
 <html lang="eng">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initinitial-scale">
@@ -71,7 +69,6 @@
     }
   </style>
 </head>
-
 <!-- body starts here--> 
 <body> 
  <div class="bg-red-700 text-white py-4 md:py-8 px-2.5 md:px-6">
@@ -89,32 +86,65 @@
      </div>
     </div>
     </div>
-     
- <!-- Publications -->
-
- <main class="pt-10 px-2.5 md:px-5 text-sm"> 
+ <main class="navbar">
+  <header class="header bg-white py-2.5 md:py-5">
+    <!-- Navigation menu -->
+<nav class=" ">
+      <div class="mx-auto px-2">
+        <div class="flex justify-between">
+          <div class=" ">
+            <a href="index.html" class=" flex">
+               <img src="img/bulc.png" alt="logo" class="logo w-14 md:w-52 rounded-full block"> 
+              <span class="text-black text-sm md:text-4xl  garamond mx-1 py-4 md:py-20 font-bold block" >Bayero University Law Clinic </span>
+            </a>
+          </div>
+          <!-- desktop menu bar-->
+         
+          <div class="pt-2 md:py-20 md:pr-4">
+            <button type="button"
+              class="cursor-pointer text-gray-500 hover:text-white focus:outline-none focus:text-white "
+              aria-label="toggle menu" onclick="toggleMenu()">
+              <div class="container " onclick="myFunction(this)">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- mobile menu bar -->
+      <div class="hidden  bg-white md:text-4xl md:px-5" id="mobile-menu">
+        <a href="index.html" class="block py-2 md:py-5 px-4  font-semibold hover:bg-gray-900">Home</a>
+        <a href="clinic-units.html" class="block md:py-5 py-2 px-4 font-semibold hover:bg-gray-900"> Clinic Units</a>
+        <a href="activities.html" class="block md:py-5  py-2 px-4  font-semibold hover:bg-gray-900"> Clinic Activities</a>
+        <a href="publications.html" class="block md:py-5 py-2 px-4 font-semibold hover:bg-gray-900">Publications</a>
+        <a href="news.html" class="block md:py-5 py-2 px-4 font-semibold hover:bg-gray-900">News and Events </a>
+        <a href="#contact" class="block py-2 md:py-5 px-4 font-semibold hover:bg-gray-900">Contact</a>
+      </div>
+    </nav>
+  </header>
+  </main>
   <!-- profile imagae-->
-
-  <section class="header-bg relative  bg-cover bg-center w-full h-75">
-
-    <div class="header-lg opacity-80 h-full bg-cover py-20  md:pt-96 px-2.5 h-75">
-      <h1 class="content-topic text-2xl  md:text-6xl uppercase  text-white  text-center"></h1>
+  <section id="header-lg" class="header-lg relative  bg-cover bg-center w-full h-75">
+    <div class="header-bg opacity-80 h-full bg-cover py-20  md:pt-96 px-2.5 h-75">
+      <h1 class="text-2xl  md:text-6xl uppercase  text-white  text-center" id="content-topic"> </h1>
     </div>
   </section>
+  
+  <!-- Publications -->
+ <main class="pt-10 px-2.5 md:px-5 text-sm"> 
 <!-- publication content--> 
  <div class="pt-8 pb-16  tracking-tight text-justify leading-5 md:leading-10 md:text-3xl">
- <h2 id="title-h" class="font-bold text-lg md:text-5xl"> </h2>
- <small class="my-5 text-sm">Published on <span id="published"></span></small>
+ <h2 class="font-bold text-lg md:text-5xl" id="title-h"></h2>
+  <small class="my-5 text-sm">Published on <span id="published"></span></small>
    <p class="mt-2.5" id="blog-content"></p>
-    
-    </div>
+ </div>
   </main>
-    
-
+   
+  
   <!--foooter starts here--> 
-
-  <footer id="contact" class="text-white text-center ">
-
+  <footer id="contact" class=" text-white text-center ">
     <section class="bg-black py-20 md:py-40">
     <div class="px-5 md:px-28  ">
       <div class="flex justify-center">
@@ -170,13 +200,16 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const blogID = urlParams.get('id')
-        // console.log(blogID);
+       console.log(blogID);
+        
+       
 
         function showPage() {
             fetch(`https://www.googleapis.com/blogger/v3/blogs/7090392525208537563/posts/${blogID}?key=AIzaSyD5dD55I9lEVPKAa5Gr_HcnpZIkhqdpXj0`)
                 .then(res => res.json())
                 .then((data) => {
-                  function formatDate(dateString) {
+                  console.log(data);
+                 /* function formatDate(dateString) {
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     
@@ -195,13 +228,13 @@
     }
 
     return `${dayOfWeek}., ${dayOfMonth}${daySuffix} ${month}., ${year}`;
-};
+};*/
                     // console.log(data)
                     document.querySelector('#title-h').innerHTML = data.title;
                     document.querySelector('#title').innerHTML = data.title;
-                    document.querySelector('#published').innerHTML = formatDate(data.published.split('T')[0]);
+                   // document.querySelector('#published').innerHTML = formatDate(data.published.split('T')[0]);
                     
-                    document.querySelector('.content-topic').innerHTML = `${data.title.toUpperCase().split(' ').slice(0, 6).join(' ')}...`;
+                    document.querySelector('#content-topic').innerHTML = `${data.title.toUpperCase().split(' ').slice(0, 6).join(' ')}...`;
                     
                     document.querySelector('#blog-content').innerHTML = data.content;
                     // console.log(document.querySelector('.blog-content').innerHTML);

@@ -93,10 +93,10 @@
  <main class="pt-10 px-2.5 md:px-5 text-sm"> 
   <!-- profile imagae-->
 
-  <section class="header-lg relative  bg-cover bg-center w-full h-75  ">
+  <section class="header-bg relative  bg-cover bg-center w-full h-75">
 
     <div class="header-bg opacity-80 h-full bg-cover py-20  md:pt-96 px-2.5 h-75">
-      <h1 class="content-topic text-2xl  md:text-6xl uppercase  text-white  text-center " ></h1>
+      <h1 class="content-topic text-2xl  md:text-6xl uppercase  text-white  text-center"></h1>
     </div>
   </section>
 <!-- publication content--> 
@@ -171,13 +171,33 @@
         // console.log(blogID);
 
         function showPage() {
-            fetch(`https://www.googleapis.com/blogger/v3/blogs/4195482384384708356/posts/${blogID}?key=AIzaSyD5dD55I9lEVPKAa5Gr_HcnpZIkhqdpXj0`)
+            fetch(`https://www.googleapis.com/blogger/v3/blogs/7090392525208537563/posts/${blogID}?key=AIzaSyD5dD55I9lEVPKAa5Gr_HcnpZIkhqdpXj0`)
                 .then(res => res.json())
                 .then((data) => {
+                  function formatDate(dateString) {
+    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
+    const date = new Date(dateString);
+    const dayOfWeek = daysOfWeek[date.getDay()];
+    const dayOfMonth = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+
+    let daySuffix;
+    switch (dayOfMonth) {
+        case 1: case 21: case 31: daySuffix = "st"; break;
+        case 2: case 22: daySuffix = "nd"; break;
+        case 3: case 23: daySuffix = "rd"; break;
+        default: daySuffix = "th";
+    }
+
+    return `${dayOfWeek}., ${dayOfMonth}${daySuffix} ${month}., ${year}`;
+};
                     // console.log(data)
                     document.querySelector('#title-h').innerHTML = data.title;
                     document.querySelector('#title').innerHTML = data.title;
-                    document.querySelector('#published').innerHTML = data.published.split('T')[0];
+                    document.querySelector('#published').innerHTML = formatDate(data.published.split('T')[0]);
                     
                     document.querySelector('.content-topic').innerHTML = `${data.title.toUpperCase().split(' ').slice(0, 6).join(' ')}...`;
                     

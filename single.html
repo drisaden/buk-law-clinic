@@ -208,8 +208,8 @@
             fetch(`https://www.googleapis.com/blogger/v3/blogs/7090392525208537563/posts/${blogID}?key=AIzaSyD5dD55I9lEVPKAa5Gr_HcnpZIkhqdpXj0`)
                 .then(res => res.json())
                 .then((data) => {
-                  console.log(data);
-                 /* function formatDate(dateString) {
+                 // console.log(data);
+                  function formatDate(dateString) {
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     
@@ -228,11 +228,11 @@
     }
 
     return `${dayOfWeek}., ${dayOfMonth}${daySuffix} ${month}., ${year}`;
-};*/
+};
                     // console.log(data)
                     document.querySelector('#title-h').innerHTML = data.title;
                     document.querySelector('#title').innerHTML = data.title;
-                   // document.querySelector('#published').innerHTML = formatDate(data.published.split('T')[0]);
+                   document.querySelector('#published').innerHTML = formatDate(data.published.split('T')[0]);
                     
                     document.querySelector('#content-topic').innerHTML = `${data.title.toUpperCase().split(' ').slice(0, 6).join(' ')}...`;
                     

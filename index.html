@@ -456,28 +456,14 @@
     <main class="py-12 bg-white px-4">
       <h1 class="text-3xl font-bold md:text-6xl text-center" > Notable Publications  </h1>
       <p class="text-center text-sm md:text-4xl my-5 md:my-10"> As part of the efforts of the Law Clinic we provide insightful contents and weekly nugget for the digest of the public.</p>
-      <article class="grid grid-cols-1 md:grid-cols-2 gap-4 py-5 md:grid-span-2">
-     <!-- article one -->
-      <div data-aos=" " class="bg-gray-100 shadow-lg w-full rounded-lg mb-3">
-        <div class="md:w-full overflow-hidden rounded-t">
-          <img src="img/legal-clinic.jpg" alt="publication caption" class="w-full h-full object-cover object-center  border border-b-0 ">
-        </div> 
-        <!--title, abstract & read more-->
-        <div class="px-5 text-center pt-10">
-          <h3 class="text-base md:text-2xl font-bold tracking-tight uppercase"> A Blueprint for Sustainable Utilization of Clinical Legal Education as a Panacea for the Rebirth of the Legal Profession in Nigeria </h3>
-           <p class="text-sm md:text-lg font-semibold my-6 text-gray-600"> <i class="fas fa-calendar"></i> December, 2020 </p>
-         <p class="text-sm mb-8 md:text-2xl tracking-tight "> Legal practice is a profession which is distinguished with advocacy and drafting. Every aspirant to the bar is required to undergo rigorous training on both advocacy and drafting skills. Both are two complementary skills which apply also to non-adjudicatory method of resolving dispute... </p>
-         <a href="cle-sustainable.html" class=""> <p class="text-sm button py-3 md:text-2xl bg-red-700 text-white  mb-5 font-semibold">Read Full » </p> </a> 
-        </div>
-    </div> 
-  
+      <article class="grid grid-cols-1 md:grid-cols-2 gap-4 py-5 md:grid-span-2"  id="populate-PublicationHome">
+
+      </article>
 <div class="flex mt-12  justify-center items-center mt-5 px-2 pb-10 animate__animated animate__fadeIn animate__slow animate__delay-0.5s">
       <button class="inline-block pulsate-bck text-white font-bold text-center btn  rounded-lg uppercase text-base md:text-4xl md:px-16 md:py-16 px-8 py-6 bg-red-500 text-xl md:text-5xl font-bold bg-gradient-to-br from-red-700 to-red-500 shadow-lg  ">
-        <a class="text-white" href="publications.html"> View More <i class="fas fa-angle-double-right font-extrabold text-white text-2xl md:text-5xl"></i> </a> </button>
+        <a class="text-white" href="/publications.html"> View More <i class="fas fa-angle-double-right font-extrabold text-white text-2xl md:text-5xl"></i> </a> </button>
     </div>
     
-<!-- important div close-->
-</article>
     </main>
     
     
@@ -722,7 +708,7 @@
     <div class="py-3 bg-white  text-black ">
     
      <!-- <p class="text-xs text-white font-light text-center md:text-3xl">  </p>-->
-      <p class="text-xs text-center md:text-3xl"> All Rights Reserved for <a href="https://bayero-university-law-clinic.com.ng"class="font-semibold  text-red-600">Bayero University Law Clinic (BULC)</a> <i class="far fa-copyright text-xs md:text-3xl "> </i> <script>document.write(new Date().getFullYear())</script> <br> Designed by <a class=" text-red-600 font-semibold" href="https://muhibqosim.github.io/muhibqosim/"> Al-Qosim </a>
+      <p class="text-xs text-center md:text-3xl"> All Rights Reserved for <a href="https://bayero-university-law-clinic.com.ng"class="font-semibold  text-red-600">Bayero University Law Clinic (BULC)</a> <i class="far fa-copyright text-xs md:text-3xl "> </i><script>document.write(new Date().getFullYear())</script> <br> Designed by <a class=" text-red-600 font-semibold" href="https://muhibqosim.github.io/muhibqosim/"> Al-Qosim </a>
       </p>
     </div>
 
@@ -731,14 +717,81 @@
 <!-- JavaScript starts here-->
   <script src="js/main.js"> </script>
   
-<script> AOS.init({
+<script>
+AOS.init({
       offset: 100,
       duration: 900,
       easing: 'ease-in-sine',
       delay: 200,
       once: true
     });
-    </script>
+ </script>
+ 
+ <script>
+ window.onload = function () {
+    fetch('https://www.googleapis.com/blogger/v3/blogs/7090392525208537563/posts?key=AIzaSyD5dD55I9lEVPKAa5Gr_HcnpZIkhqdpXj0')
+        .then(response => response.json())
+        .then(data => {
+           // console.log(data);
+            if (!data.items) {
+                console.error('No items found in data');
+                return; // Exit if no items found
+            }
+            
+            
+   const publicationHome = data.items.filter(item => item.labels && item.labels[0] === 'Publications');
+const populatePublicationHome = document.getElementById('populate-PublicationHome');
+
+
+publicationHome.forEach(item => {
+              
+function formatDate(dateString) {
+    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
+    const date = new Date(dateString);
+    const dayOfWeek = daysOfWeek[date.getDay()];
+    const dayOfMonth = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+
+    let daySuffix;
+    switch (dayOfMonth) {
+        case 1: case 21: case 31: daySuffix = "st"; break;
+        case 2: case 22: daySuffix = "nd"; break;
+        case 3: case 23: daySuffix = "rd"; break;
+        default: daySuffix = "th";
+    }
+
+    return `${dayOfWeek}., ${dayOfMonth}${daySuffix} ${month}., ${year}`;
+};
+                const src = item.content.match(/<img[^>]*src="([^"]*)"/)?.[1];
+                if (!src) {
+                    console.warn('Image source not found for item:', item.id);
+                    // Consider handling items without images differently
+                }
+
+              
+                
+                populatePublicationHome.innerHTML += `<div data-aos=" " class="bg-gray-100 shadow-lg w-full rounded-lg mb-3">
+        <div class="md:w-full overflow-hidden rounded-t">
+          <img src="${src}" alt="publication caption" class="w-full h-full object-cover object-center  border border-b-0 ">
+        </div> 
+        
+        <div class="px-5 text-center pt-10">
+          <h3 class="text-base md:text-2xl font-bold tracking-tight uppercase"> ${item.title}</h3>
+           <p class="text-sm md:text-lg font-semibold my-6 text-gray-600"> <i class="fas fa-calendar"></i> ${formatDate(item.published.split('T')[0])}</p>
+         <p class="text-sm mb-8 md:text-2xl tracking-tight ">  ${item.content.replace(/<[^>]+>/g, '').split(' ').slice(0, 20).join(' ')} ... </p>
+         <a href="https://buklawclinic.com.ng/single.html?id=${item.id}" target="_blank" class=""> <p class="text-sm button py-3 md:text-2xl bg-red-700 text-white  mb-5 font-semibold">Read Full » </p> </a> 
+        </div>
+    </div>`;
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+};
+ </script>
 <!--  <script src="js/jquery.slim.min.js" type="text/javascript" charset="utf-8"></script>-->
 <!-- <script src="js/bootstrap.js">
   </script>-->

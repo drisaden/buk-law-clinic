@@ -7,19 +7,17 @@ window.onload = function () {
                 console.error('No items found in data');
                 return; // Exit if no items found
             }
+            
+            
+            
             const publicationItems = data.items.filter(item => item.labels && item.labels.includes('Publications'));
-
+            
             const populatePublicationElement = document.getElementById('populate-Publications');
             if (!populatePublicationElement) {
                 console.error('Element #populate-Publications not found');
                 return; // Exit if the element is not found
             }
-
-
-
-
-
-
+            
             publicationItems.forEach(item => {
               
 function formatDate(dateString) {
@@ -68,5 +66,7 @@ function formatDate(dateString) {
             console.error('Error fetching data:', error);
         });
 };
+
+
 
 

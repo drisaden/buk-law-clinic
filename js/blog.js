@@ -21,8 +21,7 @@ window.onload = function () {
 
 
             publicationItems.forEach(item => {
-              // Function to format the date
-// Assuming formatDate is your function from before
+              
 function formatDate(dateString) {
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

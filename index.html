@@ -733,8 +733,8 @@ AOS.init({
       once: true
     });
  
- window.onload = function () {
-    fetch('https://www.googleapis.com/blogger/v3/blogs/7090392525208537563/posts?key=AIzaSyD5dD55I9lEVPKAa5Gr_HcnpZIkhqdpXj0')
+ document.addEventListener('DOMContentLoaded', function () {
+   fetch('https://www.googleapis.com/blogger/v3/blogs/7090392525208537563/posts?key=AIzaSyD5dD55I9lEVPKAa5Gr_HcnpZIkhqdpXj0')
         .then(response => response.json())
         .then(data => {
             // console.log(data);
@@ -794,7 +794,7 @@ AOS.init({
         .catch(error => {
             console.error('Error fetching data:', error);
         });
-};
+});
 
  </script>
 <!--  <script src="js/jquery.slim.min.js" type="text/javascript" charset="utf-8"></script>-->
